@@ -39,7 +39,7 @@ server.addTool({
     const result = await Agent.prompt(prompt, {
       apiKey,
       name: agentName ?? "cursor-poke-bridge",
-      model: "claude-4-6-sonnet",
+      model: "claude-4-6-sonnet" as any,
       cloud: {
         repos: [
           {
@@ -59,19 +59,19 @@ server.addTool({
       ? result.git.branches
           .map((entry) => {
             const parts = [entry.repoUrl];
-            if (entry.branch) parts.push(`branch: ${entry.branch}`);
-            if (entry.prUrl) parts.push(`pr: ${entry.prUrl}`);
-            return parts.join(" | ");
+            if (entry.branch) parts.push('branch: ' + entry.branch);
+            if (entry.prUrl) parts.push('pr: ' + entry.prUrl);
+            return parts.join(' | ');
           })
           .join("\n")
       : "none";
 
     return [
-      `status: ${result.status}`,
-      result.result ? `result:\n${result.result}` : "result: none",
-      `durationMs: ${result.durationMs ?? "unknown"}`,
-      `runId: ${result.id}`,
-      `branches:\n${branches}`,
+      "status: " + result.status,
+      result.result ? "result:\n" + result.result : "result: none",
+      "durationMs: " + String(result.durationMs ?? "unknown"),
+      "runId: " + String(result.id),
+      "branches:\n" + branches,
     ].join("\n\n");
   },
 });
