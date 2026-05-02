@@ -39,6 +39,7 @@ server.addTool({
     const result = await Agent.prompt(prompt, {
       apiKey,
       name: agentName ?? "cursor-poke-bridge",
+      model: "claude-3-5-sonnet",
       cloud: {
         repos: [
           {
