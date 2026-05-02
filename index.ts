@@ -36,9 +36,10 @@ server.addTool({
       throw new Error("GITHUB_TOKEN is not set");
     }
 
-    const result = await Agent.prompt(prompt, {
+    const agent = await Agent.create({
       apiKey,
       name: agentName ?? "cursor-poke-bridge",
+      model: { id: "composer-2" },
       cloud: {
         repos: [
           {
@@ -54,13 +55,15 @@ server.addTool({
       },
     });
 
+    const result = await agent.send(prompt);
+
     const branches = result.git?.branches?.length
       ? result.git.branches
           .map((entry) => {
             const parts = [entry.repoUrl];
-            if (entry.branch) parts.push('branch: ' + entry.branch);
-            if (entry.prUrl) parts.push('pr: ' + entry.prUrl);
-            return parts.join(' | ');
+            if (entry.branch) parts.push("branch: " + entry.branch);
+            if (entry.prUrl) parts.push("pr: " + entry.prUrl);
+            return parts.join(" | ");
           })
           .join("\n")
       : "none";
