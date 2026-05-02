@@ -1,0 +1,23 @@
+{
+  "name": "cursor-poke-bridge",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "tsx watch index.ts",
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cursor/sdk": "^1.0.12",
+    "dotenv": "^16.4.7",
+    "fastmcp": "^4.0.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "tsx": "^4.20.6",
+    "typescript": "^5.8.3"
+  }
+}
